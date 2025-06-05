@@ -1,26 +1,39 @@
 import java.util.Scanner;
 
-public class tugas2 {
+public class tugas3 {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        String ulang;
+
+        int[] gajiGolongan = {5000000, 6500000, 9500000};
+
+        double[] persenLembur = {0.30, 0.32, 0.34, 0.36, 0.38};
+
+        String ulang; 
 
         do {
             System.out.println("====================================");
             System.out.println("PROGRAM JAVA");
             System.out.println("PERHITUNGAN GAJI KARYAWAN");
             System.out.println("====================================");
-            
+
             char golongan;
+            int indexGolongan = -1;
             int jamLembur;
-            double gajiPokok = 0;
+            double gajiPokok;
             double gajiLembur;
 
             while (true) {
                 System.out.print("Masukkan Golongan (A/B/C): ");
                 golongan = input.next().toUpperCase().charAt(0);
 
-                if (golongan == 'A' || golongan == 'B' || golongan == 'C') {
+                if (golongan == 'A') {
+                    indexGolongan = 0;
+                    break;
+                } else if (golongan == 'B') {
+                    indexGolongan = 1;
+                    break;
+                } else if (golongan == 'C') {
+                    indexGolongan = 2;
                     break;
                 } else {
                     System.out.println("Input tidak valid! Golongan hanya boleh A, B, atau C.");
@@ -42,32 +55,32 @@ public class tugas2 {
                 }
             }
 
-            switch (golongan) {
-                case 'A': gajiPokok = 5000000; break;
-                case 'B': gajiPokok = 6500000; break;
-                case 'C': gajiPokok = 9500000; break;
-            }
+            gajiPokok = gajiGolongan[indexGolongan];
 
             if (jamLembur == 0) {
                 gajiLembur = 0;
             } else if (jamLembur == 1) {
-                gajiLembur = gajiPokok * 0.30;
+                gajiLembur = gajiPokok * persenLembur[0];
             } else if (jamLembur == 2) {
-                gajiLembur = gajiPokok * 0.32;
+                gajiLembur = gajiPokok * persenLembur[1];
             } else if (jamLembur == 3) {
-                gajiLembur = gajiPokok * 0.34;
+                gajiLembur = gajiPokok * persenLembur[2];
             } else if (jamLembur == 4) {
-                gajiLembur = gajiPokok * 0.36;
+                gajiLembur = gajiPokok * persenLembur[3];
             } else {
-                gajiLembur = gajiPokok * 0.38;
+                gajiLembur = gajiPokok * persenLembur[4];
             }
 
-            double totalPenghasilan = gajiPokok + gajiLembur;
+            double totalGaji = gajiPokok + gajiLembur;
+
             System.out.println("------------------------------------");
-            System.out.println("Total Penghasilan: Rp. " + totalPenghasilan);
+            System.out.printf("Gaji Pokok        : Rp. %,d%n", (int) gajiPokok);
+            System.out.printf("Gaji Lembur       : Rp. %,d%n", (int) gajiLembur);
+            System.out.printf("Total Penghasilan : Rp. %,d%n", (int) totalGaji);
+
             System.out.println("====================================");
 
-            System.out.print("Apakah Anda ingin menghitung lagi? (Y/T): ");
+            System.out.print("Ingin menghitung lagi? (Y/T): ");
             ulang = input.next().toUpperCase();
 
         } while (ulang.equals("Y"));
